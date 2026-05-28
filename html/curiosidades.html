@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Curiosidades del Crochet - Crocheterias Maho 🧶</title>
+  <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">🧶 Crocheterias <span>Maho</span></a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Inicio</a></li>
+      <li><a href="catalogo.html">Catálogo</a></li>
+      <li><a href="nosotros.html">Nosotros</a></li>
+      <li><a href="curiosidades.html" class="active">Curiosidades</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a href="#" class="btn-cart" onclick="toggleCart(); return false;">🛒 Carrito <span class="cart-badge" id="cart-count">0</span></a>
+      <a href="#" class="btn-login" id="nav-login-btn" onclick="openLogin(); return false;">Ingresar</a>
+      <a href="dashboard.html" class="btn-login" id="nav-user-btn" style="display:none; background:var(--rose-deep);">Mi cuenta</a>
+    </div>
+  </div>
+</nav>
+
+<div class="page-header">
+  <h1>🧶 Curiosidades del Crochet</h1>
+  <p>Datos fascinantes sobre el arte de tejer que probablemente no sabías</p>
+</div>
+
+<section class="section">
+  <div class="section-inner">
+    <!-- Dato destacado -->
+    <div style="background:linear-gradient(135deg, var(--terra-pale), var(--rose-pale)); border-radius:var(--radius); padding:2.5rem; text-align:center; margin-bottom:3rem; box-shadow:var(--shadow);">
+      <p style="font-size:3rem; margin-bottom:0.5rem;">🤯</p>
+      <h2 style="font-family:'Chewy',cursive; font-size:1.8rem; color:var(--terra-deep); margin-bottom:0.75rem;">¿Sabías que el crochet puede ser meditativo?</h2>
+      <p style="color:var(--brown-text); max-width:600px; margin:0 auto; line-height:1.7;">
+        Estudios han demostrado que tejer reduce los niveles de cortisol (la hormona del estrés)
+        hasta en un 25%. ¡Por eso Maryam empezó durante la pandemia!
+      </p>
+    </div>
+
+    <!-- GRID CURIOSIDADES (cargadas desde API) -->
+    <div class="loading" id="loading-curiosidades">
+      <div class="spinner"></div> Cargando curiosidades...
+    </div>
+
+    <div class="curiosities-grid" id="curiosidades-grid" style="display:none;"></div>
+  </div>
+</section>
+
+<!-- HISTORIA DEL CROCHET -->
+<section class="section" style="background:var(--white);">
+  <div class="section-inner">
+    <h2 class="section-title">📜 Historia del Crochet</h2>
+    <p class="section-subtitle">Un arte con siglos de historia</p>
+
+    <div style="max-width:700px; margin:0 auto;">
+      <div style="background:var(--cream); border-radius:var(--radius); padding:2rem; margin-bottom:1.5rem; border-left:5px solid var(--terra-mid);">
+        <h3 style="font-family:'Chewy',cursive; color:var(--terra-deep); margin-bottom:0.75rem; font-size:1.3rem;">🌍 Orígenes del siglo XIX</h3>
+        <p style="color:var(--brown-text); line-height:1.7;">El crochet moderno se popularizó en Europa alrededor del siglo XIX. La palabra "crochet" viene del francés antiguo y significa "gancho pequeño". Aunque técnicas similares existían en Arabia, América del Sur y China mucho antes.</p>
+      </div>
+
+      <div style="background:var(--cream); border-radius:var(--radius); padding:2rem; margin-bottom:1.5rem; border-left:5px solid var(--rose-mid);">
+        <h3 style="font-family:'Chewy',cursive; color:var(--terra-deep); margin-bottom:0.75rem; font-size:1.3rem;">👑 Arte de la realeza</h3>
+        <p style="color:var(--brown-text); line-height:1.7;">Durante el siglo XIX, la Reina Victoria de Inglaterra aprendió a hacer crochet y tejió personalmente cuadrados para una manta de la guerra de Crimea. Esto popularizó masivamente el arte entre la nobleza europea.</p>
+      </div>
+
+      <div style="background:var(--cream); border-radius:var(--radius); padding:2rem; border-left:5px solid var(--terra-mid);">
+        <h3 style="font-family:'Chewy',cursive; color:var(--terra-deep); margin-bottom:0.75rem; font-size:1.3rem;">🌎 Colombia y el tejido artesanal</h3>
+        <p style="color:var(--brown-text); line-height:1.7;">En Colombia, el tejido artesanal tiene raíces indígenas profundas. Las comunidades Wayúu de La Guajira son mundialmente reconocidas por sus mochilas tejidas. El crochet moderno se mezcló con estas tradiciones para crear un estilo único colombiano.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIPOS DE PUNTOS -->
+<section class="section">
+  <div class="section-inner">
+    <h2 class="section-title">🧵 Puntos Básicos del Crochet</h2>
+    <p class="section-subtitle">Los puntos que Maryam usa en cada creación</p>
+
+    <div class="products-grid">
+      <div class="feature-card">
+        <div class="feature-icon">⭕</div>
+        <h3>Cadena (ch)</h3>
+        <p>El punto base de todo proyecto. Forma la base de inicio y los espacios en diseños calados.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">✕</div>
+        <h3>Punto raso (sl st)</h3>
+        <p>El más pequeño de los puntos. Se usa para unir, cerrar círculos y desplazarse sin añadir altura.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔘</div>
+        <h3>Punto bajo (sc)</h3>
+        <p>El punto más básico y versátil. Perfecto para amigurumis y trabajos tupidos y resistentes.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔷</div>
+        <h3>Punto alto (dc)</h3>
+        <p>Más alto y abierto que el punto bajo. Ideal para prendas, mantas y diseños más ligeros.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section" style="background:linear-gradient(135deg,var(--terra-pale),var(--rose-pale)); text-align:center;">
+  <div class="section-inner">
+    <h2 class="section-title">¿Te picó el gusanillo del crochet? 🧶</h2>
+    <p style="color:var(--brown-text); margin-bottom:2rem;">Nosotras hacemos el trabajo por ti. Pide tu pieza personalizada hoy.</p>
+    <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
+      <a href="catalogo.html" class="btn-primary">✨ Ver catálogo</a>
+      <a href="nosotros.html" class="btn-secondary">💌 Nuestra historia</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">🧶 Crocheterias <span>Maho</span></div>
+      <p style="font-size:0.875rem; opacity:0.7;">Tejiendo sueños desde 2020.</p>
+    </div>
+    <div class="footer-section">
+      <h4>Navegación</h4>
+      <ul>
+        <li><a href="../index.html">Inicio</a></li>
+        <li><a href="catalogo.html">Catálogo</a></li>
+        <li><a href="nosotros.html">Nosotros</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">© 2025 Crocheterias Maho · CESDE Bello</div>
+</footer>
+
+<div class="modal-overlay" id="login-modal">
+  <div class="modal">
+    <h2>🧶 Bienvenida</h2>
+    <p>Inicia sesión para ver tu carrito y pedidos.</p>
+    <div class="attempts-bar" id="attempts-bar">
+      <div class="attempt-dot" id="dot1"></div>
+      <div class="attempt-dot" id="dot2"></div>
+      <div class="attempt-dot" id="dot3"></div>
+      <span style="font-size:0.75rem; color:var(--brown-text); margin-left:0.5rem;" id="attempts-text">3 intentos disponibles</span>
+    </div>
+    <div class="alert" id="login-alert"></div>
+    <div class="form-group"><label>Usuario</label><input type="text" id="login-user" placeholder="tu@correo.com"></div>
+    <div class="form-group"><label>Contraseña</label><input type="password" id="login-pass" placeholder="••••••••"></div>
+    <button class="btn-primary" style="width:100%; justify-content:center;" onclick="intentarLogin()">Ingresar</button>
+    <p style="text-align:center; font-size:0.8rem; color:var(--brown-text); margin-top:1rem; cursor:pointer;" onclick="closeLogin()">Cancelar</p>
+  </div>
+</div>
+<div class="cart-sidebar" id="cart-sidebar">
+  <div class="cart-header"><h2>🛒 Mi Carrito</h2><button class="btn-close-cart" onclick="toggleCart()">✕</button></div>
+  <div class="cart-items" id="cart-items-list"></div>
+  <div class="cart-footer">
+    <div class="cart-total"><span>Total:</span><span id="cart-total">$0</span></div>
+    <button class="btn-primary" style="width:100%; justify-content:center;" onclick="finalizarCompra()">Finalizar compra</button>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script src="../js/auth.js"></script>
+<script src="../js/cart.js"></script>
+<script src="../js/api.js"></script>
+<script>
+  const CURIOSIDADES = [
+    { num: '01', titulo: 'Crochet terapéutico', texto: 'El tejido repetitivo activa el sistema nervioso parasimpático, el mismo que se activa durante la meditación. Es un calmante natural reconocido por psicólogos.' },
+    { num: '02', titulo: 'El amigurumi japonés', texto: 'Los amigurumis nacieron en Japón en los años 80. La palabra viene de "ami" (tejido) y "nuigurumi" (peluche relleno). Hoy son un fenómeno mundial.' },
+    { num: '03', titulo: 'Un solo gancho, infinitas posibilidades', texto: 'A diferencia del tejido con agujas, el crochet usa un solo gancho. Con él se pueden hacer desde delicados encajes hasta robustas bolsas de mercado.' },
+    { num: '04', titulo: 'El crochet más grande del mundo', texto: 'En 2013, voluntarios de Reino Unido tejieron la manta de crochet más grande del mundo: 3.036 metros cuadrados, con más de 4.000 participantes.' },
+    { num: '05', titulo: 'Arte de las matemáticas', texto: 'El crochet es usado en universidades para enseñar geometría hiperbólica, un tipo de geometría imposible de construir de otra manera. ¡El tejido y las matemáticas van de la mano!' },
+    { num: '06', titulo: 'Resistente a la industrialización', texto: 'A diferencia del tejido con agujas, el crochet nunca pudo ser automatizado por máquinas industriales. Cada punto sigue siendo hecho 100% a mano.' },
+    { num: '07', titulo: 'Terapia para el dolor crónico', texto: 'Estudios en pacientes con fibromialgia muestran que tejer reduce la percepción del dolor hasta en un 34%. Es una terapia complementaria recomendada por médicos.' },
+    { num: '08', titulo: 'El crochet y la moda alta', texto: 'Diseñadores como Missoni, Chanel y Valentino han incluido prendas de crochet en sus colecciones de alta costura. Un arte popular que llegó a las pasarelas más exclusivas.' },
+    { num: '09', titulo: 'Comunidad global enorme', texto: 'Ravelry, la red social de tejido, tiene más de 9 millones de usuarios. Es una de las comunidades creativas en línea más grandes del mundo.' },
+    { num: '10', titulo: 'Crochet y memoria', texto: 'Terapeuta ocupacionales usan el crochet con pacientes de Alzheimer para estimular la memoria procedimental. Los patrones repetitivos ayudan a conservar habilidades motoras.' },
+  ];
+
+  document.addEventListener('DOMContentLoaded', () => {
+    actualizarNavbar();
+    cargarCuriosidades();
+  });
+
+  async function cargarCuriosidades() {
+    const loading = document.getElementById('loading-curiosidades');
+    const grid = document.getElementById('curiosidades-grid');
+    loading.style.display = 'flex';
+
+    // Simulamos una pequeña carga (como si fuera fetch a API)
+    await new Promise(r => setTimeout(r, 800));
+
+    try {
+      // Intento fetch a API pública (crochet facts no existe, usamos datos locales)
+      loading.style.display = 'none';
+      grid.style.display = 'grid';
+
+      CURIOSIDADES.forEach(c => {
+        const card = document.createElement('div');
+        card.className = 'curiosity-card';
+        card.innerHTML = `
+          <div class="num">${c.num}</div>
+          <h3>${c.titulo}</h3>
+          <p>${c.texto}</p>
+        `;
+        grid.appendChild(card);
+      });
+    } catch(error) {
+      loading.innerHTML = '<p style="color:var(--brown-text);">No se pudieron cargar los datos. Intenta más tarde.</p>';
+    }
+  }
+</script>
+</body>
+</html>

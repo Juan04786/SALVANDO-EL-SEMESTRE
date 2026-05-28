@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi Cuenta - Crocheterias Maho 🧶</title>
+  <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">🧶 Crocheterias <span>Maho</span></a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Inicio</a></li>
+      <li><a href="catalogo.html">Catálogo</a></li>
+      <li><a href="nosotros.html">Nosotros</a></li>
+      <li><a href="curiosidades.html">Curiosidades</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a href="#" class="btn-cart" onclick="toggleCart(); return false;">🛒 Carrito <span class="cart-badge" id="cart-count">0</span></a>
+      <button class="btn-login" style="background:var(--rose-deep);" onclick="cerrarSesion()">Cerrar sesión</button>
+    </div>
+  </div>
+</nav>
+
+<div class="page-header">
+  <h1>👤 Mi Cuenta</h1>
+  <p id="welcome-text">Bienvenida a tu espacio personal</p>
+</div>
+
+<section class="section">
+  <div class="user-dashboard">
+    <!-- Perfil -->
+    <div style="background:var(--white); border-radius:var(--radius); padding:2rem; margin-bottom:2rem; box-shadow:var(--shadow); display:flex; align-items:center; gap:1.5rem;">
+      <div style="width:70px; height:70px; background:linear-gradient(135deg,var(--terra-pale),var(--rose-pale)); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:2rem;">🧶</div>
+      <div>
+        <h2 style="font-family:'Chewy',cursive; font-size:1.5rem; color:var(--terra-deep);" id="user-name">—</h2>
+        <p style="color:var(--brown-text); font-size:0.9rem;" id="user-email">—</p>
+        <span class="badge badge-user" style="margin-top:0.25rem;" id="user-rol">usuario</span>
+      </div>
+    </div>
+
+    <!-- Mis pedidos -->
+    <h3 style="font-family:'Chewy',cursive; font-size:1.5rem; color:var(--terra-deep); margin-bottom:1rem;">📦 Mis Pedidos</h3>
+
+    <div id="pedidos-loading" class="loading"><div class="spinner"></div> Cargando tus pedidos...</div>
+
+    <ul class="orders-list" id="mis-pedidos" style="display:none;"></ul>
+
+    <div id="sin-pedidos" style="display:none; background:var(--white); border-radius:var(--radius); padding:2rem; text-align:center; box-shadow:var(--shadow);">
+      <p style="font-size:2.5rem; margin-bottom:0.75rem;">📦</p>
+      <p style="color:var(--brown-text);">Aún no tienes pedidos. ¡Explora el catálogo!</p>
+      <a href="catalogo.html" class="btn-primary" style="margin-top:1rem; display:inline-flex;">Ver productos</a>
+    </div>
+
+    <!-- Acciones rápidas -->
+    <h3 style="font-family:'Chewy',cursive; font-size:1.5rem; color:var(--terra-deep); margin:2rem 0 1rem;">⚡ Acciones rápidas</h3>
+    <div class="features-grid">
+      <a href="catalogo.html" style="text-decoration:none;" class="feature-card">
+        <div class="feature-icon">🛍️</div>
+        <h3>Ver catálogo</h3>
+        <p>Explora todos nuestros productos tejidos a mano.</p>
+      </a>
+      <a href="nosotros.html" style="text-decoration:none;" class="feature-card">
+        <div class="feature-icon">💌</div>
+        <h3>Nuestra historia</h3>
+        <p>Conoce cómo nació Crocheterias Maho.</p>
+      </a>
+      <div class="feature-card" style="cursor:pointer;" onclick="cerrarSesion()">
+        <div class="feature-icon">🚪</div>
+        <h3>Cerrar sesión</h3>
+        <p>Salir de tu cuenta de forma segura.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">🧶 Crocheterias <span>Maho</span></div>
+      <p style="font-size:0.875rem; opacity:0.7;">Tejiendo sueños desde 2020.</p>
+    </div>
+    <div class="footer-section">
+      <h4>Navegación</h4>
+      <ul>
+        <li><a href="../index.html">Inicio</a></li>
+        <li><a href="catalogo.html">Catálogo</a></li>
+        <li><a href="curiosidades.html">Curiosidades</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">© 2025 Crocheterias Maho · CESDE Bello</div>
+</footer>
+
+<div class="cart-sidebar" id="cart-sidebar">
+  <div class="cart-header"><h2>🛒 Mi Carrito</h2><button class="btn-close-cart" onclick="toggleCart()">✕</button></div>
+  <div class="cart-items" id="cart-items-list"></div>
+  <div class="cart-footer">
+    <div class="cart-total"><span>Total:</span><span id="cart-total">$0</span></div>
+    <button class="btn-primary" style="width:100%; justify-content:center;" onclick="finalizarCompra()">Finalizar compra</button>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script src="../js/auth.js"></script>
+<script src="../js/cart.js"></script>
+<script src="../js/api.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', async () => {
+    const sesion = getSesionActual();
+    if (!sesion) {
+      showToast('Debes iniciar sesión primero', 'error');
+      setTimeout(() => window.location.href = '../index.html', 1500);
+      return;
+    }
+
+    document.getElementById('welcome-text').textContent = `Bienvenida, ${sesion.nombre} 🧶`;
+    document.getElementById('user-name').textContent = sesion.nombre;
+    document.getElementById('user-email').textContent = sesion.datos?.email || sesion.nombre;
+    document.getElementById('user-rol').textContent = sesion.rol;
+
+    await cargarMisPedidos(sesion);
+  });
+
+  async function cargarMisPedidos(sesion) {
+    const loading = document.getElementById('pedidos-loading');
+    const lista = document.getElementById('mis-pedidos');
+    const sinPedidos = document.getElementById('sin-pedidos');
+
+    try {
+      const pedidos = await obtenerPedidos();
+      const misPedidos = pedidos.filter(p => p.usuario === sesion.nombre);
+
+      loading.style.display = 'none';
+
+      if (misPedidos.length === 0) {
+        sinPedidos.style.display = 'block';
+        return;
+      }
+
+      lista.style.display = 'block';
+      lista.innerHTML = misPedidos.map(p => `
+        <li class="order-item">
+          <div>
+            <strong style="color:var(--terra-deep);">Pedido #${p.id}</strong>
+            <p style="font-size:0.85rem; color:var(--brown-text); margin-top:0.25rem;">${p.producto || 'Varios productos'}</p>
+            <p style="font-size:0.8rem; color:var(--brown-text);">${p.fecha}</p>
+          </div>
+          <div style="text-align:right;">
+            <div style="font-size:1.2rem; font-weight:700; color:var(--terra-deep);">${formatPrecio(p.total)}</div>
+            <span class="badge ${p.estado === 'entregado' ? 'badge-active' : p.estado === 'pendiente' ? 'badge-inactive' : 'badge-user'}" style="margin-top:0.25rem; display:inline-block;">${p.estado}</span>
+          </div>
+        </li>
+      `).join('');
+    } catch(e) {
+      loading.style.display = 'none';
+      sinPedidos.style.display = 'block';
+    }
+  }
+</script>
+</body>
+</html>

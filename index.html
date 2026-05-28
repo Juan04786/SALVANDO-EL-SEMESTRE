@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crocheterias Maho 🧶</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">🧶 Crocheterias <span>Maho</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html" class="active">Inicio</a></li>
+      <li><a href="html/catalogo.html">Catálogo</a></li>
+      <li><a href="html/nosotros.html">Nosotros</a></li>
+      <li><a href="html/curiosidades.html">Curiosidades</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a href="#" class="btn-cart" onclick="toggleCart(); return false;">
+        🛒 Carrito
+        <span class="cart-badge" id="cart-count">0</span>
+      </a>
+      <a href="#" class="btn-login" id="nav-login-btn" onclick="openLogin(); return false;">Ingresar</a>
+      <a href="html/dashboard.html" class="btn-login" id="nav-user-btn" style="display:none; background:var(--rose-deep);">Mi cuenta</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <h1>Tejido con <span>amor</span> desde Colombia 🤍</h1>
+  <p>Amigurumis, prendas, llaveros y ramos tejidos con cariño. Cada pieza es única y personalizada especialmente para ti.</p>
+  <div class="hero-btns">
+    <a href="html/catalogo.html" class="btn-primary">✨ Ver catálogo</a>
+    <a href="html/nosotros.html" class="btn-secondary">📖 Nuestra historia</a>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="section" style="background: var(--white);">
+  <div class="section-inner">
+    <h2 class="section-title">¿Por qué elegir Maho?</h2>
+    <p class="section-subtitle">Cada punto, cada nudo, tejido con dedicación</p>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🎨</div>
+        <h3>100% Personalizado</h3>
+        <p>Cada pieza se hace según tus gustos, colores y diseño preferido.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🧶</div>
+        <h3>Hecho a mano</h3>
+        <p>Artesanía colombiana con materiales de alta calidad y mucho amor.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">⚡</div>
+        <h3>Envíos rápidos</h3>
+        <p>Entregamos en todo el país. Tu pedido llega directo a tu puerta.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">💬</div>
+        <h3>Atención cercana</h3>
+        <p>Seguimiento personalizado de tu pedido desde el inicio hasta la entrega.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTOS DESTACADOS -->
+<section class="section">
+  <div class="section-inner">
+    <h2 class="section-title">Productos Destacados</h2>
+    <p class="section-subtitle">Lo más querido de nuestra colección</p>
+    <div class="products-grid" id="featured-products">
+      <div class="loading"><div class="spinner"></div> Cargando productos...</div>
+    </div>
+    <div style="text-align:center; margin-top:2rem;">
+      <a href="html/catalogo.html" class="btn-outline">Ver todos los productos →</a>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIOS -->
+<section class="section" style="background: var(--white);">
+  <div class="section-inner">
+    <h2 class="section-title">Lo que dicen nuestras clientas 💌</h2>
+    <p class="section-subtitle">Amor tejido en cada reseña</p>
+    <div class="features-grid" id="testimonios">
+      <div class="feature-card">
+        <p style="font-style:italic; color:var(--brown-text); margin-bottom:1rem;">"Mi amigurumi llegó perfectísimo, mejor de lo que esperaba. ¡Maho es un genio del crochet!"</p>
+        <strong style="color:var(--terra-deep);">— Laura M., Medellín</strong>
+      </div>
+      <div class="feature-card">
+        <p style="font-style:italic; color:var(--brown-text); margin-bottom:1rem;">"Pedí el ramo de flores tejidas para el día de la madre y mi mamá lloró de la emoción. Gracias Maryam!"</p>
+        <strong style="color:var(--terra-deep);">— Carolina V., Bogotá</strong>
+      </div>
+      <div class="feature-card">
+        <p style="font-style:italic; color:var(--brown-text); margin-bottom:1rem;">"Los llaveros personalizados son adorables. Ya le compré a toda mi familia. ¡Calidad increíble!"</p>
+        <strong style="color:var(--terra-deep);">— Daniela R., Bello</strong>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">🧶 Crocheterias <span>Maho</span></div>
+      <p style="font-size:0.875rem; opacity:0.7; line-height:1.6;">Tejiendo sueños desde 2020. Con amor desde Bello, Antioquia.</p>
+    </div>
+    <div class="footer-section">
+      <h4>Navegación</h4>
+      <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="html/catalogo.html">Catálogo</a></li>
+        <li><a href="html/nosotros.html">Nosotros</a></li>
+        <li><a href="html/curiosidades.html">Curiosidades</a></li>
+      </ul>
+    </div>
+    <div class="footer-section">
+      <h4>Productos</h4>
+      <ul>
+        <li><a href="html/catalogo.html">Amigurumis</a></li>
+        <li><a href="html/catalogo.html">Prendas</a></li>
+        <li><a href="html/catalogo.html">Llaveros</a></li>
+        <li><a href="html/catalogo.html">Ramos tejidos</a></li>
+      </ul>
+    </div>
+    <div class="footer-section">
+      <h4>Contacto</h4>
+      <ul>
+        <li><a href="#">📍 Bello, Antioquia</a></li>
+        <li><a href="#">📱 WhatsApp</a></li>
+        <li><a href="#">📧 hola@maho.co</a></li>
+        <li><a href="#">📸 Instagram</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Crocheterias Maho · Hecho con 🧶 y mucho amor · Proyecto académico CESDE Bello</p>
+  </div>
+</footer>
+
+<!-- MODAL LOGIN -->
+<div class="modal-overlay" id="login-modal">
+  <div class="modal">
+    <h2>🧶 Bienvenida</h2>
+    <p>Inicia sesión para ver tu carrito y pedidos.</p>
+
+    <div class="attempts-bar" id="attempts-bar">
+      <div class="attempt-dot" id="dot1"></div>
+      <div class="attempt-dot" id="dot2"></div>
+      <div class="attempt-dot" id="dot3"></div>
+      <span style="font-size:0.75rem; color:var(--brown-text); margin-left:0.5rem;" id="attempts-text">3 intentos disponibles</span>
+    </div>
+
+    <div class="alert" id="login-alert"></div>
+
+    <div class="form-group">
+      <label for="login-user">Usuario</label>
+      <input type="text" id="login-user" placeholder="tu@correo.com" autocomplete="username">
+    </div>
+    <div class="form-group">
+      <label for="login-pass">Contraseña</label>
+      <input type="password" id="login-pass" placeholder="••••••••" autocomplete="current-password">
+    </div>
+    <button class="btn-primary" style="width:100%; justify-content:center;" onclick="intentarLogin()">Ingresar</button>
+    <p style="text-align:center; margin-top:1rem; font-size:0.85rem;">
+      ¿No tienes cuenta? <a href="html/registro.html" style="color:var(--rose-deep); font-weight:700;">Regístrate aquí</a>
+    </p>
+    <p style="text-align:center; font-size:0.8rem; color:var(--brown-text); margin-top:0.5rem; cursor:pointer;" onclick="closeLogin()">Cancelar</p>
+  </div>
+</div>
+
+<!-- CART SIDEBAR -->
+<div class="cart-sidebar" id="cart-sidebar">
+  <div class="cart-header">
+    <h2>🛒 Mi Carrito</h2>
+    <button class="btn-close-cart" onclick="toggleCart()">✕</button>
+  </div>
+  <div class="cart-items" id="cart-items-list">
+    <div class="cart-empty">
+      <div class="cart-empty-icon">🛒</div>
+      <p>Tu carrito está vacío</p>
+      <a href="html/catalogo.html" class="btn-outline" style="margin-top:1rem;">Ver productos</a>
+    </div>
+  </div>
+  <div class="cart-footer">
+    <div class="cart-total">
+      <span>Total:</span>
+      <span id="cart-total">$0</span>
+    </div>
+    <button class="btn-primary" style="width:100%; justify-content:center;" onclick="finalizarCompra()">Finalizar compra</button>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script src="js/auth.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/api.js"></script>
+<script>
+  // Cargar productos destacados al inicio
+  document.addEventListener('DOMContentLoaded', () => {
+    cargarProductosDestacados();
+    actualizarNavbar();
+  });
+
+  async function cargarProductosDestacados() {
+    try {
+      const productos = await obtenerProductos();
+      const destacados = productos.slice(0, 4);
+      const grid = document.getElementById('featured-products');
+      grid.innerHTML = destacados.map(p => renderProductCard(p)).join('');
+    } catch(e) {
+      document.getElementById('featured-products').innerHTML =
+        '<p style="color:var(--brown-text); text-align:center; padding:2rem;">No se pudieron cargar los productos. Intenta más tarde.</p>';
+    }
+  }
+</script>
+</body>
+</html>

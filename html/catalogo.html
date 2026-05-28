@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catálogo - Crocheterias Maho 🧶</title>
+  <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">🧶 Crocheterias <span>Maho</span></a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Inicio</a></li>
+      <li><a href="catalogo.html" class="active">Catálogo</a></li>
+      <li><a href="nosotros.html">Nosotros</a></li>
+      <li><a href="curiosidades.html">Curiosidades</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a href="#" class="btn-cart" onclick="toggleCart(); return false;">
+        🛒 Carrito <span class="cart-badge" id="cart-count">0</span>
+      </a>
+      <a href="#" class="btn-login" id="nav-login-btn" onclick="openLogin(); return false;">Ingresar</a>
+      <a href="dashboard.html" class="btn-login" id="nav-user-btn" style="display:none; background:var(--rose-deep);">Mi cuenta</a>
+    </div>
+  </div>
+</nav>
+
+<div class="page-header">
+  <h1>🧶 Nuestro Catálogo</h1>
+  <p>Cada pieza es única, hecha con amor y personalizable según tus deseos</p>
+</div>
+
+<section class="section">
+  <div class="section-inner">
+    <!-- Filtros -->
+    <div class="filter-bar">
+      <input type="text" class="search-input" id="search-input" placeholder="🔍 Buscar productos..." oninput="filtrarProductos()">
+      <button class="filter-btn active" onclick="setFiltro('todos', this)">Todos</button>
+      <button class="filter-btn" onclick="setFiltro('amigurumis', this)">🐻 Amigurumis</button>
+      <button class="filter-btn" onclick="setFiltro('prendas', this)">👗 Prendas</button>
+      <button class="filter-btn" onclick="setFiltro('llaveros', this)">🗝️ Llaveros</button>
+      <button class="filter-btn" onclick="setFiltro('ramos', this)">🌹 Ramos</button>
+      <button class="filter-btn" onclick="setFiltro('otros', this)">✨ Otros</button>
+    </div>
+
+    <!-- Contador -->
+    <p style="color:var(--brown-text); margin-bottom:1.5rem;" id="count-text">Cargando productos...</p>
+
+    <!-- Loading -->
+    <div class="loading" id="loading-indicator">
+      <div class="spinner"></div> Cargando productos desde la tienda...
+    </div>
+
+    <!-- Grid de productos -->
+    <div class="products-grid" id="products-grid" style="display:none;"></div>
+
+    <!-- Sin resultados -->
+    <div id="no-results" style="display:none; text-align:center; padding:3rem; color:var(--brown-text);">
+      <p style="font-size:3rem; margin-bottom:1rem;">🔍</p>
+      <p>No encontramos productos con ese filtro. ¡Prueba otra búsqueda!</p>
+    </div>
+  </div>
+</section>
+
+<!-- MODAL DETALLE -->
+<div class="modal-overlay" id="detail-modal">
+  <div class="modal" style="max-width:500px;">
+    <div id="modal-content"></div>
+    <p style="text-align:center; font-size:0.85rem; color:var(--brown-text); margin-top:1rem; cursor:pointer;" onclick="closeDetail()">Cerrar</p>
+  </div>
+</div>
+
+<!-- MODAL LOGIN -->
+<div class="modal-overlay" id="login-modal">
+  <div class="modal">
+    <h2>🧶 Bienvenida</h2>
+    <p>Inicia sesión para ver tu carrito y pedidos.</p>
+    <div class="attempts-bar" id="attempts-bar">
+      <div class="attempt-dot" id="dot1"></div>
+      <div class="attempt-dot" id="dot2"></div>
+      <div class="attempt-dot" id="dot3"></div>
+      <span style="font-size:0.75rem; color:var(--brown-text); margin-left:0.5rem;" id="attempts-text">3 intentos disponibles</span>
+    </div>
+    <div class="alert" id="login-alert"></div>
+    <div class="form-group">
+      <label for="login-user">Usuario</label>
+      <input type="text" id="login-user" placeholder="tu@correo.com">
+    </div>
+    <div class="form-group">
+      <label for="login-pass">Contraseña</label>
+      <input type="password" id="login-pass" placeholder="••••••••">
+    </div>
+    <button class="btn-primary" style="width:100%; justify-content:center;" onclick="intentarLogin()">Ingresar</button>
+    <p style="text-align:center; margin-top:1rem; font-size:0.85rem;">
+      ¿No tienes cuenta? <a href="registro.html" style="color:var(--rose-deep); font-weight:700;">Regístrate</a>
+    </p>
+    <p style="text-align:center; font-size:0.8rem; color:var(--brown-text); margin-top:0.5rem; cursor:pointer;" onclick="closeLogin()">Cancelar</p>
+  </div>
+</div>
+
+<!-- CART -->
+<div class="cart-sidebar" id="cart-sidebar">
+  <div class="cart-header">
+    <h2>🛒 Mi Carrito</h2>
+    <button class="btn-close-cart" onclick="toggleCart()">✕</button>
+  </div>
+  <div class="cart-items" id="cart-items-list"></div>
+  <div class="cart-footer">
+    <div class="cart-total"><span>Total:</span><span id="cart-total">$0</span></div>
+    <button class="btn-primary" style="width:100%; justify-content:center;" onclick="finalizarCompra()">Finalizar compra</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">🧶 Crocheterias <span>Maho</span></div>
+      <p style="font-size:0.875rem; opacity:0.7;">Tejiendo sueños desde 2020.</p>
+    </div>
+    <div class="footer-section">
+      <h4>Navegación</h4>
+      <ul>
+        <li><a href="../index.html">Inicio</a></li>
+        <li><a href="nosotros.html">Nosotros</a></li>
+        <li><a href="curiosidades.html">Curiosidades</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">© 2025 Crocheterias Maho · CESDE Bello</div>
+</footer>
+
+<script src="../js/auth.js"></script>
+<script src="../js/cart.js"></script>
+<script src="../js/api.js"></script>
+<script>
+  let todosLosProductos = [];
+  let filtroActual = 'todos';
+
+  document.addEventListener('DOMContentLoaded', async () => {
+    actualizarNavbar();
+    await cargarCatalogo();
+  });
+
+  // MOMENTO 3: Función asíncrona con fetch, try/catch, y manejo de carga
+  async function cargarCatalogo() {
+    document.getElementById('loading-indicator').style.display = 'flex';
+    document.getElementById('products-grid').style.display = 'none';
+    document.getElementById('count-text').textContent = 'Cargando productos...';
+
+    try {
+      todosLosProductos = await obtenerProductos();
+      mostrarProductos(todosLosProductos);
+    } catch(error) {
+      document.getElementById('loading-indicator').style.display = 'none';
+      document.getElementById('count-text').textContent = '';
+      document.getElementById('no-results').innerHTML = `
+        <p style="font-size:2rem;">😔</p>
+        <p>No se pudieron cargar los datos. Intenta más tarde.</p>
+      `;
+      document.getElementById('no-results').style.display = 'block';
+    }
+  }
+
+  function mostrarProductos(lista) {
+    const grid = document.getElementById('products-grid');
+    const loading = document.getElementById('loading-indicator');
+    const noResults = document.getElementById('no-results');
+    const countText = document.getElementById('count-text');
+
+    loading.style.display = 'none';
+
+    if (lista.length === 0) {
+      grid.style.display = 'none';
+      noResults.style.display = 'block';
+      countText.textContent = '';
+      return;
+    }
+
+    noResults.style.display = 'none';
+    grid.style.display = 'grid';
+    countText.textContent = `Mostrando ${lista.length} producto${lista.length !== 1 ? 's' : ''}`;
+
+    // Crear elementos con createElement y appendChild
+    grid.innerHTML = '';
+    lista.forEach(p => {
+      const card = document.createElement('div');
+      card.className = 'product-card';
+      card.dataset.id = p.id;
+      card.innerHTML = `
+        <div class="product-img" onclick="verDetalle('${p.id}')" style="cursor:pointer;">${p.emoji || '🧶'}</div>
+        <div class="product-body">
+          <span class="product-tag">${p.categoria}</span>
+          <h3 class="product-name">${p.nombre}</h3>
+          <p class="product-desc">${p.descripcion}</p>
+          <div class="product-footer">
+            <span class="product-price">${formatPrecio(p.precio)}</span>
+            <button class="btn-add-cart" onclick='addToCart(${JSON.stringify(p)})'>+ Agregar</button>
+          </div>
+        </div>`;
+      grid.appendChild(card);
+    });
+  }
+
+  function setFiltro(categoria, btn) {
+    filtroActual = categoria;
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    filtrarProductos();
+  }
+
+  function filtrarProductos() {
+    const busqueda = document.getElementById('search-input').value.toLowerCase();
+    const filtrados = todosLosProductos.filter(p => {
+      const coincideCategoria = filtroActual === 'todos' || p.categoria === filtroActual;
+      const coincideBusqueda = p.nombre.toLowerCase().includes(busqueda) ||
+                               p.descripcion.toLowerCase().includes(busqueda);
+      return coincideCategoria && coincideBusqueda;
+    });
+    mostrarProductos(filtrados);
+  }
+
+  function verDetalle(id) {
+    const p = todosLosProductos.find(x => x.id === id || x.id === Number(id));
+    if (!p) return;
+    document.getElementById('modal-content').innerHTML = `
+      <div style="text-align:center; margin-bottom:1.5rem;">
+        <div style="font-size:5rem; margin-bottom:0.5rem;">${p.emoji || '🧶'}</div>
+        <span class="product-tag">${p.categoria}</span>
+      </div>
+      <h2 style="font-size:1.8rem; color:var(--terra-deep); margin-bottom:0.5rem;">${p.nombre}</h2>
+      <p style="color:var(--brown-text); line-height:1.7; margin-bottom:1.5rem;">${p.descripcion}</p>
+      <div style="display:flex; justify-content:space-between; align-items:center; background:var(--terra-pale); padding:1rem; border-radius:var(--radius-sm); margin-bottom:1.5rem;">
+        <span style="font-size:1.4rem; font-weight:700; color:var(--terra-deep);">${formatPrecio(p.precio)}</span>
+        <span style="font-size:0.85rem; color:var(--brown-text);">Stock: ${p.stock || 'Disponible'}</span>
+      </div>
+      <button class="btn-primary" style="width:100%; justify-content:center;" onclick='addToCart(${JSON.stringify(p)}); closeDetail();'>🛒 Añadir al carrito</button>
+    `;
+    document.getElementById('detail-modal').classList.add('open');
+  }
+
+  function closeDetail() {
+    document.getElementById('detail-modal').classList.remove('open');
+  }
+
+  document.getElementById('detail-modal').addEventListener('click', e => {
+    if (e.target === document.getElementById('detail-modal')) closeDetail();
+  });
+</script>
+</body>
+</html>

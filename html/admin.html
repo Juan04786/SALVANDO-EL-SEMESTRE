@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel Admin - Crocheterias Maho</title>
+  <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">🧶 Crocheterias <span>Maho</span></a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Inicio</a></li>
+      <li><a href="catalogo.html">Catálogo</a></li>
+      <li><a href="nosotros.html">Nosotros</a></li>
+      <li><a href="curiosidades.html">Curiosidades</a></li>
+    </ul>
+    <div class="nav-actions">
+      <span style="color:var(--terra-deep); font-weight:700; font-size:0.9rem;">🔐 Panel Admin</span>
+      <button class="btn-login" style="background:var(--rose-deep);" onclick="cerrarSesion()">Cerrar sesión</button>
+    </div>
+  </div>
+</nav>
+
+<div class="admin-layout">
+  <!-- SIDEBAR -->
+  <aside class="admin-sidebar">
+    <h3>Menú</h3>
+    <ul class="admin-nav">
+      <li><a href="#" class="active" onclick="showSection('dashboard')">📊 Dashboard</a></li>
+      <li><a href="#" onclick="showSection('productos')">🧶 Productos</a></li>
+      <li><a href="#" onclick="showSection('usuarios')">👥 Usuarios</a></li>
+      <li><a href="#" onclick="showSection('pedidos')">📦 Pedidos</a></li>
+      <li><a href="#" onclick="showSection('resenas')">⭐ Reseñas</a></li>
+    </ul>
+    <br>
+    <h3>Accesos</h3>
+    <ul class="admin-nav">
+      <li><a href="catalogo.html">🛍️ Ver tienda</a></li>
+      <li><a href="#" onclick="cerrarSesion()">🚪 Salir</a></li>
+    </ul>
+  </aside>
+
+  <!-- CONTENIDO -->
+  <main class="admin-content">
+
+    <!-- DASHBOARD -->
+    <div id="section-dashboard">
+      <h2 style="font-family:'Chewy',cursive; font-size:2rem; color:var(--terra-deep); margin-bottom:1.5rem;">📊 Dashboard</h2>
+
+      <div class="admin-stats">
+        <div class="stat-card">
+          <div class="stat-num" id="stat-productos">—</div>
+          <div class="stat-label">Productos</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num" id="stat-usuarios">—</div>
+          <div class="stat-label">Usuarios</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num" id="stat-pedidos">—</div>
+          <div class="stat-label">Pedidos</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num" id="stat-ventas">—</div>
+          <div class="stat-label">Ventas totales</div>
+        </div>
+      </div>
+
+      <h3 style="font-family:'Chewy',cursive; color:var(--terra-deep); margin:1.5rem 0 1rem;">📦 Pedidos recientes</h3>
+      <div class="admin-table-wrap">
+        <table class="admin-table">
+          <thead>
+            <tr><th>ID</th><th>Cliente</th><th>Producto</th><th>Total</th><th>Estado</th></tr>
+          </thead>
+          <tbody id="pedidos-recientes-body">
+            <tr><td colspan="5" style="text-align:center; color:var(--brown-text);">Cargando...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- PRODUCTOS -->
+    <div id="section-productos" style="display:none;">
+      <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:1.5rem;">
+        <h2 style="font-family:'Chewy',cursive; font-size:2rem; color:var(--terra-deep);">🧶 Productos</h2>
+        <button class="btn-primary" onclick="abrirModalProducto()">+ Nuevo producto</button>
+      </div>
+
+      <div class="admin-table-wrap">
+        <table class="admin-table">
+          <thead>
+            <tr><th>Emoji</th><th>Nombre</th><th>Categoría</th><th>Precio</th><th>Stock</th><th>Acciones</th></tr>
+          </thead>
+          <tbody id="productos-body">
+            <tr><td colspan="6" style="text-align:center;"><div class="spinner" style="margin:1rem auto;"></div></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- USUARIOS -->
+    <div id="section-usuarios" style="display:none;">
+      <h2 style="font-family:'Chewy',cursive; font-size:2rem; color:var(--terra-deep); margin-bottom:1.5rem;">👥 Usuarios</h2>
+      <div class="admin-table-wrap">
+        <table class="admin-table">
+          <thead>
+            <tr><th>Nombre</th><th>Email</th><th>Rol</th><th>Estado</th><th>Registro</th></tr>
+          </thead>
+          <tbody id="usuarios-body">
+            <tr><td colspan="5" style="text-align:center;"><div class="spinner" style="margin:1rem auto;"></div></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- PEDIDOS -->
+    <div id="section-pedidos" style="display:none;">
+      <h2 style="font-family:'Chewy',cursive; font-size:2rem; color:var(--terra-deep); margin-bottom:1.5rem;">📦 Pedidos</h2>
+      <div class="admin-table-wrap">
+        <table class="admin-table">
+          <thead>
+            <tr><th>ID</th><th>Cliente</th><th>Producto</th><th>Total</th><th>Estado</th><th>Fecha</th></tr>
+          </thead>
+          <tbody id="pedidos-body">
+            <tr><td colspan="6" style="text-align:center;"><div class="spinner" style="margin:1rem auto;"></div></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- RESEÑAS -->
+    <div id="section-resenas" style="display:none;">
+      <h2 style="font-family:'Chewy',cursive; font-size:2rem; color:var(--terra-deep); margin-bottom:1.5rem;">⭐ Reseñas</h2>
+      <div id="resenas-lista" class="curiosities-grid"></div>
+    </div>
+
+  </main>
+</div>
+
+<!-- MODAL PRODUCTO -->
+<div class="modal-overlay" id="modal-producto">
+  <div class="modal" style="max-width:480px;">
+    <h2 id="modal-producto-titulo">Nuevo Producto</h2>
+    <input type="hidden" id="producto-edit-id">
+    <div class="form-group"><label>Nombre</label><input type="text" id="prod-nombre" placeholder="Nombre del producto"></div>
+    <div class="form-group"><label>Descripción</label><input type="text" id="prod-descripcion" placeholder="Descripción breve"></div>
+    <div class="form-group">
+      <label>Categoría</label>
+      <select id="prod-categoria">
+        <option value="amigurumis">🐻 Amigurumis</option>
+        <option value="prendas">👗 Prendas</option>
+        <option value="llaveros">🗝️ Llaveros</option>
+        <option value="ramos">🌹 Ramos</option>
+        <option value="otros">✨ Otros</option>
+      </select>
+    </div>
+    <div class="form-group"><label>Precio (COP)</label><input type="number" id="prod-precio" placeholder="45000"></div>
+    <div class="form-group"><label>Stock</label><input type="number" id="prod-stock" placeholder="5"></div>
+    <div class="form-group"><label>Emoji</label><input type="text" id="prod-emoji" placeholder="🧶"></div>
+    <div style="display:flex; gap:0.75rem; margin-top:1rem;">
+      <button class="btn-primary" style="flex:1; justify-content:center;" onclick="guardarProducto()">Guardar</button>
+      <button class="btn-outline" style="flex:1; justify-content:center;" onclick="cerrarModalProducto()">Cancelar</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="../js/auth.js"></script>
+<script src="../js/api.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', async () => {
+    // Verificar que sea admin
+    const sesion = getSesionActual();
+    if (!sesion || sesion.rol !== 'admin') {
+      showToast('Acceso restringido. Solo administradores.', 'error');
+      setTimeout(() => window.location.href = '../index.html', 1500);
+      return;
+    }
+    cargarDashboard();
+  });
+
+  function showSection(name) {
+    ['dashboard','productos','usuarios','pedidos','resenas'].forEach(s => {
+      document.getElementById(`section-${s}`).style.display = s === name ? 'block' : 'none';
+    });
+    document.querySelectorAll('.admin-nav a').forEach(a => a.classList.remove('active'));
+
+    if (name === 'productos') cargarProductosAdmin();
+    if (name === 'usuarios') cargarUsuariosAdmin();
+    if (name === 'pedidos') cargarPedidosAdmin();
+    if (name === 'resenas') cargarResenasAdmin();
+  }
+
+  async function cargarDashboard() {
+    try {
+      const [productos, usuarios, pedidos] = await Promise.all([
+        obtenerProductos(),
+        obtenerUsuarios(),
+        obtenerPedidos()
+      ]);
+
+      document.getElementById('stat-productos').textContent = productos.length;
+      document.getElementById('stat-usuarios').textContent = usuarios.length || getUsuariosMock().length;
+      document.getElementById('stat-pedidos').textContent = pedidos.length || getPedidosMock().length;
+
+      const totalVentas = (pedidos.length > 0 ? pedidos : getPedidosMock())
+        .reduce((s, p) => s + (p.total || 0), 0);
+      document.getElementById('stat-ventas').textContent =
+        new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', maximumFractionDigits: 0 }).format(totalVentas);
+
+      const pedidosData = pedidos.length > 0 ? pedidos : getPedidosMock();
+      const tbody = document.getElementById('pedidos-recientes-body');
+      tbody.innerHTML = pedidosData.slice(0, 5).map(p => `
+        <tr>
+          <td>${p.id}</td>
+          <td>${p.usuario}</td>
+          <td>${p.producto || (Array.isArray(p.productos) ? p.productos[0]?.nombre || '—' : '—')}</td>
+          <td>${formatPrecio(p.total)}</td>
+          <td><span class="badge ${p.estado === 'entregado' ? 'badge-active' : p.estado === 'pendiente' ? 'badge-inactive' : 'badge-user'}">${p.estado}</span></td>
+        </tr>
+      `).join('');
+    } catch(e) {
+      console.error('Error cargando dashboard:', e);
+    }
+  }
+
+  async function cargarProductosAdmin() {
+    const tbody = document.getElementById('productos-body');
+    tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;"><div class="spinner" style="margin:1rem auto;"></div></td></tr>';
+    try {
+      const productos = await obtenerProductos();
+      tbody.innerHTML = productos.map(p => `
+        <tr>
+          <td style="font-size:1.5rem;">${p.emoji || '🧶'}</td>
+          <td>${p.nombre}</td>
+          <td><span class="badge badge-user">${p.categoria}</span></td>
+          <td>${formatPrecio(p.precio)}</td>
+          <td>${p.stock || '—'}</td>
+          <td style="display:flex; gap:0.5rem;">
+            <button class="btn-outline" style="padding:0.3rem 0.75rem; font-size:0.8rem;" onclick='editarProducto(${JSON.stringify(p)})'>✏️</button>
+            <button class="btn-outline" style="padding:0.3rem 0.75rem; font-size:0.8rem; color:var(--rose-deep); border-color:var(--rose-mid);" onclick="eliminarProducto('${p.id}')">🗑️</button>
+          </td>
+        </tr>
+      `).join('');
+    } catch(e) {
+      tbody.innerHTML = '<tr><td colspan="6" style="color:var(--brown-text); text-align:center;">Error al cargar productos</td></tr>';
+    }
+  }
+
+  async function cargarUsuariosAdmin() {
+    const tbody = document.getElementById('usuarios-body');
+    const usuarios = getUsuariosMock();
+    tbody.innerHTML = usuarios.map(u => `
+      <tr>
+        <td>${u.nombre}</td>
+        <td>${u.email}</td>
+        <td><span class="badge ${u.rol === 'admin' ? 'badge-admin' : 'badge-user'}">${u.rol}</span></td>
+        <td><span class="badge ${u.activo ? 'badge-active' : 'badge-inactive'}">${u.activo ? 'Activo' : 'Inactivo'}</span></td>
+        <td>${u.fechaRegistro}</td>
+      </tr>
+    `).join('');
+  }
+
+  async function cargarPedidosAdmin() {
+    const tbody = document.getElementById('pedidos-body');
+    const pedidos = getPedidosMock();
+    tbody.innerHTML = pedidos.map(p => `
+      <tr>
+        <td>${p.id}</td>
+        <td>${p.usuario}</td>
+        <td>${p.producto}</td>
+        <td>${formatPrecio(p.total)}</td>
+        <td><span class="badge ${p.estado === 'entregado' ? 'badge-active' : p.estado === 'pendiente' ? 'badge-inactive' : 'badge-user'}">${p.estado}</span></td>
+        <td>${p.fecha}</td>
+      </tr>
+    `).join('');
+  }
+
+  function cargarResenasAdmin() {
+    const lista = document.getElementById('resenas-lista');
+    const resenas = [
+      { nombre: 'Laura M.', texto: 'Mi amigurumi llegó perfectísimo!', estrellas: 5, producto: 'Amigurumi Osito' },
+      { nombre: 'Carolina V.', texto: 'El ramo de flores tejidas es una maravilla.', estrellas: 5, producto: 'Ramo de Rosas' },
+      { nombre: 'Daniela R.', texto: 'Los llaveros son adorables.', estrellas: 4, producto: 'Llavero' },
+    ];
+    lista.innerHTML = resenas.map(r => `
+      <div class="curiosity-card">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem;">
+          <strong style="color:var(--terra-deep);">${r.nombre}</strong>
+          <span>${'⭐'.repeat(r.estrellas)}</span>
+        </div>
+        <p style="font-size:0.85rem; color:var(--brown-text); font-style:italic; margin-bottom:0.5rem;">"${r.texto}"</p>
+        <small style="color:var(--rose-deep);">${r.producto}</small>
+      </div>
+    `).join('');
+  }
+
+  function abrirModalProducto() {
+    document.getElementById('modal-producto-titulo').textContent = 'Nuevo Producto';
+    document.getElementById('producto-edit-id').value = '';
+    ['prod-nombre','prod-descripcion','prod-precio','prod-stock','prod-emoji'].forEach(id => {
+      document.getElementById(id).value = '';
+    });
+    document.getElementById('modal-producto').classList.add('open');
+  }
+
+  function editarProducto(p) {
+    document.getElementById('modal-producto-titulo').textContent = 'Editar Producto';
+    document.getElementById('producto-edit-id').value = p.id;
+    document.getElementById('prod-nombre').value = p.nombre;
+    document.getElementById('prod-descripcion').value = p.descripcion;
+    document.getElementById('prod-categoria').value = p.categoria;
+    document.getElementById('prod-precio').value = p.precio;
+    document.getElementById('prod-stock').value = p.stock || '';
+    document.getElementById('prod-emoji').value = p.emoji || '';
+    document.getElementById('modal-producto').classList.add('open');
+  }
+
+  function cerrarModalProducto() {
+    document.getElementById('modal-producto').classList.remove('open');
+  }
+
+  async function guardarProducto() {
+    const id = document.getElementById('producto-edit-id').value;
+    const producto = {
+      nombre: document.getElementById('prod-nombre').value,
+      descripcion: document.getElementById('prod-descripcion').value,
+      categoria: document.getElementById('prod-categoria').value,
+      precio: Number(document.getElementById('prod-precio').value),
+      stock: Number(document.getElementById('prod-stock').value),
+      emoji: document.getElementById('prod-emoji').value,
+      disponible: true
+    };
+
+    try {
+      if (id) {
+        await ProductosController.update(id, producto);
+        showToast('Producto actualizado ✅', 'success');
+      } else {
+        await ProductosController.create(producto);
+        showToast('Producto creado ✅', 'success');
+      }
+      cerrarModalProducto();
+      cargarProductosAdmin();
+    } catch(e) {
+      showToast('Error al guardar producto', 'error');
+    }
+  }
+
+  async function eliminarProducto(id) {
+    if (!confirm('¿Estás segura de eliminar este producto?')) return;
+    try {
+      await ProductosController.delete(id);
+      showToast('Producto eliminado', 'success');
+      cargarProductosAdmin();
+    } catch(e) {
+      showToast('Error al eliminar', 'error');
+    }
+  }
+
+  document.getElementById('modal-producto').addEventListener('click', e => {
+    if (e.target === document.getElementById('modal-producto')) cerrarModalProducto();
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registro - Crocheterias Maho 🧶</title>
+  <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">🧶 Crocheterias <span>Maho</span></a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Inicio</a></li>
+      <li><a href="catalogo.html">Catálogo</a></li>
+      <li><a href="nosotros.html">Nosotros</a></li>
+      <li><a href="curiosidades.html">Curiosidades</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section style="min-height:calc(100vh - 70px); display:flex; align-items:center; justify-content:center; padding:2rem; background:linear-gradient(135deg,var(--terra-pale),var(--rose-pale));">
+  <div class="modal" style="max-width:460px; width:100%;">
+    <div style="text-align:center; margin-bottom:1.5rem;">
+      <p style="font-size:3rem;">🧶</p>
+      <h2>Crear cuenta</h2>
+      <p>Únete a la familia Crocheterias Maho</p>
+    </div>
+
+    <div class="alert" id="reg-alert"></div>
+
+    <div class="form-group">
+      <label>Nombre completo</label>
+      <input type="text" id="reg-nombre" placeholder="Tu nombre">
+    </div>
+    <div class="form-group">
+      <label>Correo electrónico</label>
+      <input type="email" id="reg-email" placeholder="tu@correo.com">
+    </div>
+    <div class="form-group">
+      <label>Contraseña</label>
+      <input type="password" id="reg-pass" placeholder="Mínimo 6 caracteres">
+    </div>
+    <div class="form-group">
+      <label>Confirmar contraseña</label>
+      <input type="password" id="reg-pass2" placeholder="Repite tu contraseña">
+    </div>
+
+    <button class="btn-primary" style="width:100%; justify-content:center; margin-bottom:1rem;" onclick="registrarse()">Crear cuenta</button>
+
+    <p style="text-align:center; font-size:0.875rem; color:var(--brown-text);">
+      ¿Ya tienes cuenta? <a href="#" style="color:var(--rose-deep); font-weight:700;" onclick="history.back()">Inicia sesión</a>
+    </p>
+  </div>
+</section>
+
+<div class="toast" id="toast"></div>
+
+<script src="../js/auth.js"></script>
+<script src="../js/api.js"></script>
+<script>
+  function mostrarAlertaReg(msg, tipo = 'error') {
+    const al = document.getElementById('reg-alert');
+    al.className = `alert show alert-${tipo}`;
+    al.textContent = msg;
+  }
+
+  async function registrarse() {
+    const nombre = document.getElementById('reg-nombre').value.trim();
+    const email = document.getElementById('reg-email').value.trim();
+    const pass = document.getElementById('reg-pass').value;
+    const pass2 = document.getElementById('reg-pass2').value;
+
+    if (!nombre || !email || !pass || !pass2) {
+      mostrarAlertaReg('Completa todos los campos.');
+      return;
+    }
+
+    if (!email.includes('@')) {
+      mostrarAlertaReg('Ingresa un correo válido.');
+      return;
+    }
+
+    if (pass.length < 6) {
+      mostrarAlertaReg('La contraseña debe tener mínimo 6 caracteres.');
+      return;
+    }
+
+    if (pass !== pass2) {
+      mostrarAlertaReg('Las contraseñas no coinciden.');
+      return;
+    }
+
+    const nuevoUsuario = {
+      nombre,
+      email,
+      password: pass,
+      rol: 'user',
+      activo: true,
+      fechaRegistro: new Date().toISOString().split('T')[0]
+    };
+
+    try {
+      await UsuariosController.create(nuevoUsuario);
+      mostrarAlertaReg('¡Cuenta creada con éxito! Iniciando sesión...', 'success');
+      setTimeout(() => {
+        loginExitoso(nombre, 'user', nuevoUsuario);
+        setTimeout(() => window.location.href = 'dashboard.html', 800);
+      }, 1200);
+    } catch(e) {
+      // Registro local si MockAPI falla
+      mostrarAlertaReg('¡Cuenta creada! Iniciando sesión...', 'success');
+      setTimeout(() => {
+        loginExitoso(nombre, 'user', nuevoUsuario);
+        setTimeout(() => window.location.href = 'dashboard.html', 800);
+      }, 1200);
+    }
+  }
+
+  document.addEventListener('keydown', e => { if (e.key === 'Enter') registrarse(); });
+</script>
+</body>
+</html>

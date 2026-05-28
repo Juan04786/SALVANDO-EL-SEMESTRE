@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nosotros - Crocheterias Maho 🧶</title>
+  <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">🧶 Crocheterias <span>Maho</span></a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Inicio</a></li>
+      <li><a href="catalogo.html">Catálogo</a></li>
+      <li><a href="nosotros.html" class="active">Nosotros</a></li>
+      <li><a href="curiosidades.html">Curiosidades</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a href="#" class="btn-cart" onclick="toggleCart(); return false;">🛒 Carrito <span class="cart-badge" id="cart-count">0</span></a>
+      <a href="#" class="btn-login" id="nav-login-btn" onclick="openLogin(); return false;">Ingresar</a>
+      <a href="dashboard.html" class="btn-login" id="nav-user-btn" style="display:none; background:var(--rose-deep);">Mi cuenta</a>
+    </div>
+  </div>
+</nav>
+
+<div class="page-header">
+  <h1>💌 Nuestra Historia</h1>
+  <p>De una pandemia a una pasión. Así nació Crocheterias Maho.</p>
+</div>
+
+<section class="section">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div class="about-img-placeholder">🧶</div>
+      <div class="about-text">
+        <h2>¡Hola! Soy Maryam 👋</h2>
+        <p>
+          Todo comenzó en el año <span class="highlight">2020</span>, cuando el mundo se detuvo.
+          El encierro de la pandemia me llevó a buscar algo que mantuviera mi mente activa,
+          algo creativo y significativo. Fue así como descubrí el <span class="highlight">crochet</span>.
+        </p>
+        <p>
+          Al principio era solo un pasatiempo: un gancho, un ovillo de hilo y mucha paciencia.
+          Pero con cada punto que tejía, sentía que algo especial estaba naciendo. Mis primeras
+          creaciones fueron pequeñas, imperfectas y llenas de amor.
+        </p>
+        <p>
+          Poco a poco, mis amigos y familia comenzaron a pedir piezas personalizadas.
+          Primero un amigurumi, luego un llavero, después un ramo de flores tejidas que nunca
+          se marchitaran... y sin darme cuenta, <span class="highlight">Crocheterias Maho</span> nació.
+        </p>
+        <p>
+          Hoy, desde <span class="highlight">Bello, Antioquia</span>, tejo cada pieza con la misma
+          pasión y dedicación del primer día. Cada producto sale de mis manos con un propósito:
+          que quien lo reciba sienta el amor que le puse al tejerlo.
+        </p>
+
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-year">🦠 2020 — El comienzo</div>
+            <div class="timeline-desc">En pandemia descubro el crochet como escape creativo y terapéutico.</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-year">🧶 2021 — Primeros pedidos</div>
+            <div class="timeline-desc">Amigos y familia empiezan a solicitar piezas personalizadas. Nace la marca.</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-year">🌹 2022 — Nuevos productos</div>
+            <div class="timeline-desc">Incorporo ramos de flores tejidas y prendas personalizadas al catálogo.</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-year">📚 2023 — CESDE Bello</div>
+            <div class="timeline-desc">Inicio estudios de programación para llevar el negocio al mundo digital.</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-year">💻 2025 — Crocheterias Maho Online</div>
+            <div class="timeline-desc">Lanzo esta tienda web para llegar a más personas en toda Colombia.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VALORES -->
+<section class="section" style="background: var(--white);">
+  <div class="section-inner">
+    <h2 class="section-title">Nuestros Valores</h2>
+    <p class="section-subtitle">Tejemos con estos principios en cada pieza</p>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">💕</div>
+        <h3>Amor artesanal</h3>
+        <p>Cada punto es una muestra de cariño. Jamás producimos en masa; todo es hecho con dedicación única.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🎨</div>
+        <h3>Creatividad sin límites</h3>
+        <p>Tú pides, yo creo. No hay diseño imposible cuando hay pasión y un buen gancho.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🌱</div>
+        <h3>Sostenibilidad</h3>
+        <p>Usamos hilos de calidad y empaque eco-amigable. Cuidamos nuestro planeta mientras tejemos.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🤝</div>
+        <h3>Conexión humana</h3>
+        <p>Más que productos, creamos recuerdos y conexiones entre personas a través de regalos únicos.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section" style="background: linear-gradient(135deg, var(--terra-pale), var(--rose-pale)); text-align:center;">
+  <div class="section-inner">
+    <h2 class="section-title">¿Lista para tu pieza única?</h2>
+    <p class="section-subtitle" style="margin-bottom:2rem;">Cada creación de Crocheterias Maho lleva un trozo de corazón</p>
+    <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
+      <a href="catalogo.html" class="btn-primary">✨ Ver catálogo</a>
+      <a href="curiosidades.html" class="btn-secondary">🧶 Curiosidades del crochet</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">🧶 Crocheterias <span>Maho</span></div>
+      <p style="font-size:0.875rem; opacity:0.7; line-height:1.6;">Tejiendo sueños desde 2020. Con amor desde Bello, Antioquia.</p>
+    </div>
+    <div class="footer-section">
+      <h4>Navegación</h4>
+      <ul>
+        <li><a href="../index.html">Inicio</a></li>
+        <li><a href="catalogo.html">Catálogo</a></li>
+        <li><a href="curiosidades.html">Curiosidades</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">© 2025 Crocheterias Maho · CESDE Bello</div>
+</footer>
+
+<!-- MODALS -->
+<div class="modal-overlay" id="login-modal">
+  <div class="modal">
+    <h2>🧶 Bienvenida</h2>
+    <p>Inicia sesión para ver tu carrito y pedidos.</p>
+    <div class="attempts-bar" id="attempts-bar">
+      <div class="attempt-dot" id="dot1"></div>
+      <div class="attempt-dot" id="dot2"></div>
+      <div class="attempt-dot" id="dot3"></div>
+      <span style="font-size:0.75rem; color:var(--brown-text); margin-left:0.5rem;" id="attempts-text">3 intentos disponibles</span>
+    </div>
+    <div class="alert" id="login-alert"></div>
+    <div class="form-group"><label>Usuario</label><input type="text" id="login-user" placeholder="tu@correo.com"></div>
+    <div class="form-group"><label>Contraseña</label><input type="password" id="login-pass" placeholder="••••••••"></div>
+    <button class="btn-primary" style="width:100%; justify-content:center;" onclick="intentarLogin()">Ingresar</button>
+    <p style="text-align:center; font-size:0.8rem; color:var(--brown-text); margin-top:1rem; cursor:pointer;" onclick="closeLogin()">Cancelar</p>
+  </div>
+</div>
+
+<div class="cart-sidebar" id="cart-sidebar">
+  <div class="cart-header"><h2>🛒 Mi Carrito</h2><button class="btn-close-cart" onclick="toggleCart()">✕</button></div>
+  <div class="cart-items" id="cart-items-list"></div>
+  <div class="cart-footer">
+    <div class="cart-total"><span>Total:</span><span id="cart-total">$0</span></div>
+    <button class="btn-primary" style="width:100%; justify-content:center;" onclick="finalizarCompra()">Finalizar compra</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="../js/auth.js"></script>
+<script src="../js/cart.js"></script>
+<script src="../js/api.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => actualizarNavbar());
+</script>
+</body>
+</html>
