@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="https://jakarta.ee/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence
+             https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd"
+             version="3.0">
+
+    <persistence-unit name="CrocheteriasUnit" transaction-type="RESOURCE_LOCAL">
+
+        <!-- Proveedor de persistencia -->
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+
+        <!-- Entidades mapeadas -->
+        <class>com.maho.crochet.entity.Rol</class>
+        <class>com.maho.crochet.entity.Usuario</class>
+        <class>com.maho.crochet.entity.Categoria</class>
+        <class>com.maho.crochet.entity.Producto</class>
+        <class>com.maho.crochet.entity.Pedido</class>
+        <class>com.maho.crochet.entity.DetallePedido</class>
+        <class>com.maho.crochet.entity.Resena</class>
+
+        <properties>
+            <!-- Conexión a PostgreSQL -->
+            <property name="jakarta.persistence.jdbc.driver"
+                      value="org.postgresql.Driver"/>
+            <property name="jakarta.persistence.jdbc.url"
+                      value="jdbc:postgresql://localhost:5432/crocheterias_maho"/>
+            <property name="jakarta.persistence.jdbc.user"     value="postgres"/>
+            <property name="jakarta.persistence.jdbc.password" value="tu_password"/>
+
+            <!-- Hibernate dialect y schema -->
+            <property name="hibernate.dialect"
+                      value="org.hibernate.dialect.PostgreSQLDialect"/>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+
+            <!-- Mostrar SQL generado (útil en desarrollo) -->
+            <property name="hibernate.show_sql"    value="true"/>
+            <property name="hibernate.format_sql"  value="true"/>
+
+            <!-- Pool de conexiones -->
+            <property name="hibernate.connection.pool_size" value="5"/>
+
+            <!-- Encoding -->
+            <property name="hibernate.connection.characterEncoding" value="UTF-8"/>
+        </properties>
+
+    </persistence-unit>
+
+</persistence>
